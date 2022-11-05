@@ -1,0 +1,65 @@
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h3 class="font-weight-bold">A place for you to find your dream job</h3>
+        <p class="lead text-muted">No 1. job website that can help you land your dream job</p>
+      </div>
+    </div>
+  </section>
+  <div class="b-example-divider"></div>
+  <div class="py-5 bg-light">
+    <div class="container ">
+      <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
+        <!--mx-auto use for centering-->
+        <div class="col mx-auto">
+          <div class="card mb-4 rounded-3 shadow-sm">
+            <img class="card-img-top" src="/assets/job.jpg" alt="Card image cap">
+            <div class="card-header py-3">
+              <h4 class="my-0 fw-normal">Welcome</h4>
+            </div>
+            <div class="card-body">
+             <strong class="my-0">Ready for the next step</strong>
+             <p class="text-muted">Create an account for tools to help you</p>
+             <div class="d-grid gap-2 mb-2">
+              <button type="button" class="btn-block btn btn-outline-primary">Primary</button>
+             </div>
+             <div class="d-grid gap-2">
+              <button type="button" class="btn-block btn btn-outline-primary">Primary</button>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b-example-divider"></div>
+  <div class="px-4 py-5 my-5">
+			<table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Country</th>
+            <th scope="col">Area</th>
+            <th scope="col">Population</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let country of countries; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img
+                [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
+                class="me-2"
+                style="width: 20px"
+              />
+              {{ country.name }}
+            </td>
+            <td>{{ country.area | number }}</td>
+            <td>{{ country.population | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</main>
+
