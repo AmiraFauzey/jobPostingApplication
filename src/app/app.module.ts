@@ -7,6 +7,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
 import { PostJobComponent } from './post-job/post-job.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EmployerDashboardComponent } from './employer-dashboard/employer-dashbo
     EmployerDashboardComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule
   ],
