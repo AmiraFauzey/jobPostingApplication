@@ -1,0 +1,121 @@
+label {
+    display:block; 
+    text-align:left;
+}
+.btn-edit{
+    margin-left:5px;
+}
+.form-group.required .form-label::after{
+    content:"*";
+    color:red;
+}
+
+/* Multi Step form Column */
+
+.progress {
+    border-radius: 0px !important;
+}
+
+/* button#prev-btn,
+button#next-btn,
+button#submit-btn {
+    box-sizing: border-box;
+    background:none #2557a7;
+    appearance: none;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #2557a7;
+    cursor: pointer;
+    justify-content: center;
+    position: relative;
+    margin: 0px;
+    margin-top: 40px;
+    overflow: hidden;
+    z-index: 1;
+    line-height: 1.5;
+    font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", Roboto, Noto, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    width: 130px;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+} */
+button#prev-btn,
+button#next-btn,
+button#submit-btn {
+    box-sizing: border-box;
+    background:none #2557a7;
+    appearance: none;
+    user-select: none;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #2557a7;
+    cursor: pointer;
+    justify-content: center;
+    margin: 0px;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    line-height: 1.5;
+    font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", Roboto, Noto, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    color: rgb(255, 255, 255);
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center; 
+}
+button#prev-btn:after,
+button#next-btn:after,
+button#submit-btn:after {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #2557a7;
+    content: "";
+    z-index: -2;
+    transition: transform .3s;
+}
+ 
+button#prev-btn:hover::after,
+button#next-btn:hover::after,
+button#submit-btn:hover::after {
+    transform: translateY(-80%);
+    transition: transform .3s;
+}
+
+.progress {
+    border-radius: 0px !important;
+}
+
+.form-input{
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form-input:hover{
+    border-color: #2557a7;
+}
+.form-input:before,
+.form-input::after{
+    position: absolute;
+    content: "";
+}
+.form-input:before{
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: inset 0 0 0 1px #ced4da;
+}
+

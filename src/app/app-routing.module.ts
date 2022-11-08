@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateEmployerAccountComponent } from './create-employer-account/create-employer-account.component';
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { FrontPageComponent } from './front-page/front-page.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
   { path: 'job/post', component: PostJobComponent },
   { path: 'job/employerDashboard', component: EmployerDashboardComponent },
 
-
+  { path: 'job/createEmployer', component: CreateEmployerAccountComponent},
   { path:'**', component: ErrorPageComponent}
 ];
 

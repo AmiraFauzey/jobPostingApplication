@@ -8,6 +8,8 @@ import { PostJobComponent } from './post-job/post-job.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateEmployerAccountComponent } from './create-employer-account/create-employer-account.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,17 @@ import { HttpClientModule } from '@angular/common/http';
     PostJobComponent,
     FrontPageComponent,
     ErrorPageComponent,
-    EmployerDashboardComponent
+    EmployerDashboardComponent,
+    CreateEmployerAccountComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
