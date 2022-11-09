@@ -17,9 +17,10 @@ export class PostJobComponent implements OnInit {
   JobBenefit: JobBenefitTypes[] = [];
   JobSchedule: JobScheduleTypes[] = [];
   JobType: JobTypes[] = [];
+  selectedJobTypes: JobTypes[] = [];
   SupplementaryType: SupplementalPayTypes[] = [];
-  PayOption: any;
-  constructor(private jobWebServiceService: JobWebServiceService) {}
+
+  constructor(private jobWebServiceService: JobWebServiceService) { }
 
   noOfCandidateHire = [
     { id: 1, number: '1' },
@@ -36,6 +37,8 @@ export class PostJobComponent implements OnInit {
     { id: 12, number: 'I have an ongoing need to fill this role' },
   ];
 
+  selectedNumberOfCandidatesForHire = this.noOfCandidateHire[0];
+
   HireDuration = [
     { id: 1, duration: '1 to 3 days' },
     { id: 2, duration: '3 to 7 days' },
@@ -44,12 +47,14 @@ export class PostJobComponent implements OnInit {
     { id: 5, duration: 'More than 4 weeks' },
   ];
 
-  payBy = [
+  payOption = [
     { id: 1, pay: 'Range' },
     { id: 2, pay: 'Starting amount' },
     { id: 3, pay: 'Maximum amount' },
     { id: 4, pay: 'Exact amount' },
   ];
+
+  selectedPayOption = { id: 1, pay: 'Range' };
 
   payByRate = [
     { id: 1, rate: 'per hour' },
@@ -58,6 +63,8 @@ export class PostJobComponent implements OnInit {
     { id: 4, rate: 'per month' },
     { id: 5, rate: 'per year' },
   ];
+
+  selectedPayByRate = { id: 1, rate: 'per hour' };
 
   ngOnInit(): void {
     // this.quicktoolService.getCategories().subscribe(res => {
@@ -101,10 +108,10 @@ export class PostJobComponent implements OnInit {
   }
 
   TypeTag(tag: any) {
-    if (this.JobType.indexOf(tag) < 0) {
-      this.JobType.push(tag);
+    if (this.selectedJobTypes.indexOf(tag) < 0) {
+      this.selectedJobTypes.push(tag);
     } else {
-      this.JobType = this.JobType.filter((t) => t != tag);
+      this.selectedJobTypes = this.selectedJobTypes.filter((t) => t != tag);
     }
   }
 

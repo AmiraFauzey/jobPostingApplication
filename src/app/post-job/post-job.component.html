@@ -1,224 +1,265 @@
 <div class="container d-flex align-items-center min-vh-100">
     <main>
-      <div class="row g-0 justify-content-center">
-        <!-- FORMS -->
-        <div class="col-lg-7 mx-0 px-0">
-          <!-- <div class="progress">
+        <div class="row g-0 justify-content-center">
+            <!-- FORMS -->
+            <div class="col-lg-7 mx-0 px-0">
+                <!-- <div class="progress">
               <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 0%"></div>
           </div> -->
-            <button class="btn btn-outline-success" (click)="step(1)">basic information</button>
-            <button class="btn btn-outline-success" (click)="step(2)">Include details</button>
-            <button class="btn btn-outline-success" (click)="step(3)">Add compensation</button>
-            <button class="btn btn-outline-success" (click)="step(4)">Review</button>
-          <div id="qbox-container">
-              <form class="needs-validation" id="form-wrapper" method="post" name="form-wrapper" novalidate>
-                  <!-- STEPS HERE -->
-                  <div id="steps-container">
-                      <!--BASIC INFORMATION-->
-                      <div class="step" [hidden]="currentStep != 1">
-                          <div class="row align-items-center g-lg-5 my-5">
-                              <div class="col-lg-7 text-center text-lg-start">
-                                  <h1 class="display-4 fw-bold lh-1 mb-3">Provide basic information</h1>
-                              </div>
-                              <div class="col-md-10 mx-auto col-lg-5">
-                                  <img class="d-block mx-lg-auto img-fluid img-responsive" src="/assets/createAccount.jpg" alt="Card image cap">
-                              </div>
-                          </div>
-                            <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                                <div class="mb-3 row text-align: left;">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label "><span class="text-start">Country</span></label>
-                                    <div class="col-sm-8 text-start">
-                                        <span>Country</span>
-                                        <button class="btn-sm btn-dark btn-edit"><i class="bi bi-pencil-square"></i></button>
+                <div class="btn-group mt-2 mb-2">
+                    <button class="btn btn-outline-success" (click)="step(1)">Basic Information</button>
+                    <button class="btn btn-outline-success" (click)="step(2)">Include Details</button>
+                    <button class="btn btn-outline-success" (click)="step(3)">Add Compensation</button>
+                    <button class="btn btn-outline-success" (click)="step(4)">Review</button>
+                </div>
+                <div id="qbox-container">
+                    <form class="needs-validation" id="form-wrapper" method="post" name="form-wrapper" novalidate>
+                        <!-- STEPS HERE -->
+                        <div id="steps-container">
+                            <!--BASIC INFORMATION-->
+                            <div class="step" [hidden]="currentStep != 1">
+                                <div class="row align-items-center g-lg-5 my-5">
+                                    <div class="col-lg-7 text-center text-lg-start">
+                                        <h1 class="display-4 fw-bold lh-1 mb-3">Provide basic information</h1>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label"><span class="text-start">Language</span></label>
-                                    <div class="col-sm-8 text-start">
-                                        <span>English</span>
-                                        <button class="btn-sm btn-dark btn-edit"><i class="bi bi-pencil-square"></i></button>
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label"><span class="text-start">Company name</span></label>
-                                    <div class="col-sm-8 text-start">
-                                        <span>Amazon</span>
-                                        <button class="btn-sm btn-dark btn-edit"><i class="bi bi-pencil-square"></i></button>
-                                    </div>
-                                  </div>
-                            </div>
-                            <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                                <div class="mb-3 row">
-                                    <div class="mb-3 form-group required">
-                                        <label class="form-label">Job title</label>
-                                        <input type="email" class="form-control form-input" id="jobTitle">
+                                    <div class="col-md-10 mx-auto col-lg-5">
+                                        <img class="d-block mx-lg-auto img-fluid img-responsive"
+                                            src="/assets/createAccount.jpg" alt="Card image cap">
                                     </div>
                                 </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row text-align: left;">
+                                        <label for="staticEmail" class="col-sm-3 col-form-label "><span
+                                                class="text-start">Country</span></label>
+                                        <div class="col-sm-8 text-start">
+                                            <span>Country</span>
+                                            <button class="btn-sm btn-dark btn-edit"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="staticEmail" class="col-sm-3 col-form-label"><span
+                                                class="text-start">Language</span></label>
+                                        <div class="col-sm-8 text-start">
+                                            <span>English</span>
+                                            <button class="btn-sm btn-dark btn-edit"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="staticEmail" class="col-sm-3 col-form-label"><span
+                                                class="text-start">Company name</span></label>
+                                        <div class="col-sm-8 text-start">
+                                            <span>Amazon</span>
+                                            <button class="btn-sm btn-dark btn-edit"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Job title</label>
+                                            <input type="email" class="form-control form-input" id="jobTitle">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Job description</label>
+                                            <textarea class="form-control form-input"
+                                                placeholder="Enter job description" id="floatingTextarea"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Job location</label>
+                                            <input type="email" class="form-control form-input" id="jobTitle">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-success" (click)="step(currentStep + 1)">Next</button>
+                                    <!-- () from html to ts -->
+                                </div>
                             </div>
-                            <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                                <div class="mb-3 row">
-                                    <div class="mb-3 form-group required">
-                                        <label class="form-label">Job description</label>
-                                        <textarea class="form-control form-input" placeholder="Enter job description" id="floatingTextarea"></textarea>
+                            <!--BASIC INFORMATION-->
+                            <!--Include details-->
+                            <div class="step" [hidden]="currentStep != 2">
+                                <div class="row align-items-center g-lg-5 my-5">
+                                    <div class="col-lg-7 text-center text-lg-start">
+                                        <h1 class="display-4 fw-bold lh-1 mb-3">Include details</h1>
+                                    </div>
+                                    <div class="col-md-10 mx-auto col-lg-5">
+                                        <img class="d-block mx-lg-auto img-fluid img-responsive"
+                                            src="/assets/include-details.jpg" alt="Card image cap">
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">what is the job type?</label>
+                                            <button class="btn btn-sm mx-1" *ngFor="let t of JobType"
+                                                (click)="TypeTag(t)"
+                                                [ngClass]="(selectedJobTypes.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobType}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">what is the schedule for this job?</label>
+                                            <button class="btn btn-sm mx-1" *ngFor="let t of JobSchedule"
+                                                (click)="ScheduleTag(t)"
+                                                [ngClass]="(JobSchedule.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobScheduleType}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">How many people do you want to hire for this
+                                                opening?</label>
+                                            <p align="left"><small>The more opening you have the more applicants you
+                                                    will need</small></p>
+                                            <!-- <select class="form-select form-input" aria-label="Default select example">
+                                                <option selected>Select an option</option>
+                                                <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
+                                                    {{n.number}}
+                                                </option>
+                                            </select> -->
+
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    {{selectedNumberOfCandidatesForHire.number}}
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li *ngFor="let n of noOfCandidateHire"><a class="dropdown-item"
+                                                            (click)="selectedNumberOfCandidatesForHire = n">{{n.number}}</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">How quickly do you need to hire?</label>
+                                            <p align="left"><small>if you need someone fast, you may need higher
+                                                    visibility</small></p>
+                                            <select class="form-select form-input" aria-label="Default select example">
+                                                <option selected>Select an option</option>
+                                                <option *ngFor="let n of HireDuration" [ngValue]="n.id">
+                                                    {{n.duration}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-success" (click)="step(3)">Next</button>
+                                    <!-- () from html to ts -->
+                                </div>
+                            </div>
+                            <!--Include details-->
+                            <!--Add compensation-->
+                            <div class="step" [hidden]="currentStep != 3">
+                                <div class="row align-items-center g-lg-5 my-5">
+                                    <div class="col-lg-7 text-center text-lg-start">
+                                        <h1 class="display-4 fw-bold lh-1 mb-3">Add compensation</h1>
+                                    </div>
+                                    <div class="col-md-10 mx-auto col-lg-5">
+                                        <img class="d-block mx-lg-auto img-fluid img-responsive"
+                                            src="/assets/compensation.jpg" alt="Card image cap">
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group">
+                                            <label class="form-label">What is the pay?</label>
+                                            <p align="left"><small>Review the pay we estimated for your job and make
+                                                    adjustments if needed</small></p>
+                                            <p align="left"><small>Show pay by</small></p>
+                                            <select class="form-select form-input">
+                                                <option *ngFor="let n of payOption" (click)="selectedPayOption = n">
+                                                    {{n.pay}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class=" row" *ngIf="selectedPayOption.id == 1">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Minimum</label>
+                                            <input type="text" class="form-control" id="minimumId">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Maximum</label>
+                                            <input type="text" class="form-control" id="minimumId">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Rate</label>
+                                            <select class="form-select form-input">
+                                                <option *ngFor="let n of payByRate" (click)="selectedPayByRate = n">
+                                                    {{n.rate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group">
+                                            <label class="form-label">Do you offer any of the following supplemental
+                                                pay?</label>
+                                            <button class="btn btn-sm mx-1" *ngFor="let t of SupplementaryType"
+                                                (click)="TypeTag(t)"
+                                                [ngClass]="(SupplementaryType.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.supplementalType}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group">
+                                            <label class="form-labe">Are any of the following benefits
+                                                offered?</label>
+                                            <button class="btn btn-sm mx-1" *ngFor="let t of JobBenefit"
+                                                (click)="BenefitTag(t)"
+                                                [ngClass]="(JobBenefit.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobBenefitType}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-success" (click)="step(4)">Next</button>
+                                    <!-- () from html to ts -->
+                                </div>
+                            </div>
+                            <!--Add compensation-->
+                            <!--Review Job Post-->
+                            <div class="step" [hidden]="currentStep != 4">
+                                <div class="row align-items-center g-lg-5 my-5">
+                                    <div class="col-lg-7 text-center text-lg-start">
+                                        <h1 class="display-4 fw-bold lh-1 mb-3">Review the job post</h1>
+                                    </div>
+                                    <div class="col-md-10 mx-auto col-lg-5">
+                                        <img class="d-block mx-lg-auto img-fluid img-responsive"
+                                            src="/assets/reviewJob.jpg" alt="Card image cap">
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                                <div class="mb-3 row">
-                                    <div class="mb-3 form-group required">
-                                        <label class="form-label">Job location</label>
-                                        <input type="email" class="form-control form-input" id="jobTitle">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-success" (click)="step(2)">Next</button> <!-- () from html to ts -->
-                            </div>
-                      </div>
-                      <!--BASIC INFORMATION-->
-                      <!--Include details-->
-                      <div class="step" [hidden]="currentStep != 2">
-                        <div class="row align-items-center g-lg-5 my-5">
-                            <div class="col-lg-7 text-center text-lg-start">
-                                <h1 class="display-4 fw-bold lh-1 mb-3">Include details</h1>
-                            </div>
-                            <div class="col-md-10 mx-auto col-lg-5">
-                                <img class="d-block mx-lg-auto img-fluid img-responsive" src="/assets/include-details.jpg" alt="Card image cap">
-                            </div>
+                            <!--Review Job Post-->
                         </div>
-                        <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                            <div class="mb-3 row">
-                                <div class="mb-3 form-group required">
-                                    <label class="form-label">what is the job type?</label>
-                                    <button class="btn btn-sm mx-1" *ngFor="let t of JobType" (click)="TypeTag(t)"
-                                            [ngClass]="(JobType.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobType}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                            <div class="mb-3 row">
-                                <div class="mb-3 form-group required">
-                                    <label class="form-label">what is the schedule for this job?</label>
-                                    <button class="btn btn-sm mx-1" *ngFor="let t of JobSchedule" (click)="ScheduleTag(t)"
-                                            [ngClass]="(JobSchedule.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobScheduleType}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                            <div class="mb-3 row">
-                                <div class="mb-3 form-group required">
-                                    <label class="form-label">How many people do you want to hire for this opening?</label>
-                                    <p align="left"><small>The more opening you have the more applicants you will need</small></p>
-                                    <select class="form-select form-input" aria-label="Default select example">
-                                        <option selected>Select an option</option>
-                                        <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
-                                            {{n.number}}
-                                      </option>
-                                    </select>
-                                </div>
-                                <div class="mb-3 form-group required">
-                                    <label class="form-label">How quickly do you need to hire?</label>
-                                    <p align="left"><small>if you need someone fast, you may need higher visibility</small></p>
-                                    <select class="form-select form-input" aria-label="Default select example">
-                                        <option selected>Select an option</option>
-                                        <option *ngFor="let n of HireDuration" [ngValue]="n.id">
-                                            {{n.duration}}
-                                      </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success" (click)="step(3)">Next</button> <!-- () from html to ts -->
-                        </div>
-                      </div>
-                      <!--Include details-->
-                      <!--Add compensation-->
-                      <div class="step" [hidden]="currentStep != 3">
-                        <div class="row align-items-center g-lg-5 my-5">
-                            <div class="col-lg-7 text-center text-lg-start">
-                                <h1 class="display-4 fw-bold lh-1 mb-3">Add compensation</h1>
-                            </div>
-                            <div class="col-md-10 mx-auto col-lg-5">
-                                <img class="d-block mx-lg-auto img-fluid img-responsive" src="/assets/compensation.jpg" alt="Card image cap">
-                            </div>
-                        </div>
-                        <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                            <div class="mb-3 row">
-                                <div class="mb-3 form-group">
-                                    <label class="form-label">What is the pay?</label>
-                                    <p align="left"><small>Review the pay we estimated for your job and make adjustments if needed</small></p>
-                                    <p align="left"><small>Show pay by</small></p>
-                                    <select class="form-select form-input " [(ngModel)]="PayOption">
-                                        <option *ngFor="let n of payBy" [ngValue]="n.id">
-                                            {{n.pay}}
-                                      </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" *ngIf="PayOption == 1">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Minimum</label>
-                                    <input type="text" class="form-control" id="minimumId">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Maximum</label>
-                                    <input type="text" class="form-control" id="minimumId">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Rate</label>
-                                    <select class="form-select form-input " [(ngModel)]="payBy">
-                                        <option *ngFor="let n of payByRate" [ngValue]="n.id">
-                                            {{n.rate}}
-                                      </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                            <div class="mb-3 row">
-                                <div class="mb-3 form-group">
-                                    <label class="form-label">Do you offer any of the following supplemental pay?</label>
-                                    <button class="btn btn-sm mx-1" *ngFor="let t of SupplementaryType" (click)="TypeTag(t)"
-                                            [ngClass]="(SupplementaryType.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.supplementalType}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                            <div class="mb-3 row">
-                                <div class="mb-3 form-group">
-                                    <label class="form-labe">Are any of the following benefits offered?</label>
-                                        <button class="btn btn-sm mx-1" *ngFor="let t of JobBenefit" (click)="BenefitTag(t)"
-                                            [ngClass]="(JobBenefit.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobBenefitType}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success" (click)="step(4)">Next</button> <!-- () from html to ts -->
-                        </div>
-                      </div>
-                      <!--Add compensation-->
-                      <!--Review Job Post-->
-                      <div class="step" [hidden]="currentStep != 4">
-                        <div class="row align-items-center g-lg-5 my-5">
-                            <div class="col-lg-7 text-center text-lg-start">
-                                <h1 class="display-4 fw-bold lh-1 mb-3">Review the job post</h1>
-                            </div>
-                            <div class="col-md-10 mx-auto col-lg-5">
-                                <img class="d-block mx-lg-auto img-fluid img-responsive" src="/assets/reviewJob.jpg" alt="Card image cap">
-                            </div>
-                        </div>
-                      </div>
-                      <!--Review Job Post-->
-                  </div>
-                  <!-- <div id="q-box__buttons">
+                        <!-- <div id="q-box__buttons">
                     <button id="prev-btn" type="button" (click)="back()">Back</button> 
                     <button id="next-btn" type="button" (click)="save()">Save and continue</button> 
                     <button id="submit-btn" type="submit" (click)="submit()">Submit</button>
                  </div> -->
-              </form>
-          </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </main>
-  </div>
+</div>
