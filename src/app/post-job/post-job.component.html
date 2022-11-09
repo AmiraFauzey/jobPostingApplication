@@ -111,9 +111,9 @@
                                     <p align="left"><small>The more opening you have the more applicants you will need</small></p>
                                     <select class="form-select form-input" aria-label="Default select example">
                                         <option selected>Select an option</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
+                                            {{n.number}}
+                                      </option>
                                     </select>
                                 </div>
                                 <div class="mb-3 form-group required">
@@ -121,11 +121,9 @@
                                     <p align="left"><small>if you need someone fast, you may need higher visibility</small></p>
                                     <select class="form-select form-input" aria-label="Default select example">
                                         <option selected>Select an option</option>
-                                        <option value="1">1 to 3 days</option>
-                                        <option value="2">3 to 7 days</option>
-                                        <option value="3">1 to 2 weeks</option>
-                                        <option value="3">2 to 4 weeks</option>
-                                        <option value="3">more than 4 weeks</option>
+                                        <option *ngFor="let n of HireDuration" [ngValue]="n.id">
+                                            {{n.duration}}
+                                      </option>
                                     </select>
                                 </div>
                             </div>
@@ -151,11 +149,28 @@
                                     <label class="form-label">What is the pay?</label>
                                     <p align="left"><small>Review the pay we estimated for your job and make adjustments if needed</small></p>
                                     <p align="left"><small>Show pay by</small></p>
-                                    <select class="form-select form-input" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select form-input " [(ngModel)]="PayOption">
+                                        <option *ngFor="let n of payBy" [ngValue]="n.id">
+                                            {{n.pay}}
+                                      </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="PayOption == 1">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Minimum</label>
+                                    <input type="text" class="form-control" id="minimumId">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Maximum</label>
+                                    <input type="text" class="form-control" id="minimumId">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Rate</label>
+                                    <select class="form-select form-input " [(ngModel)]="payBy">
+                                        <option *ngFor="let n of payByRate" [ngValue]="n.id">
+                                            {{n.rate}}
+                                      </option>
                                     </select>
                                 </div>
                             </div>
