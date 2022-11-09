@@ -102,8 +102,8 @@
                                     <div class="mb-3 row">
                                         <div class="mb-3 form-group required">
                                             <label class="form-label">what is the job type?</label>
-                                            <button class="btn btn-sm mx-1" *ngFor="let t of JobType"
-                                                (click)="TypeTag(t)"
+                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobType"
+                                                (click)="typeTag(t)"
                                                 [ngClass]="(selectedJobTypes.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobType}}</button>
                                         </div>
                                     </div>
@@ -112,9 +112,9 @@
                                     <div class="mb-3 row">
                                         <div class="mb-3 form-group required">
                                             <label class="form-label">what is the schedule for this job?</label>
-                                            <button class="btn btn-sm mx-1" *ngFor="let t of JobSchedule"
-                                                (click)="ScheduleTag(t)"
-                                                [ngClass]="(JobSchedule.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobScheduleType}}</button>
+                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobSchedule"
+                                                (click)="scheduleTag(t)"
+                                                [ngClass]="(selectedJobSchedule.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobScheduleType}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -125,14 +125,14 @@
                                                 opening?</label>
                                             <p align="left"><small>The more opening you have the more applicants you
                                                     will need</small></p>
-                                            <!-- <select class="form-select form-input" aria-label="Default select example">
+                                            <select class="form-select form-input" aria-label="Default select example">
                                                 <option selected>Select an option</option>
                                                 <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
                                                     {{n.number}}
                                                 </option>
-                                            </select> -->
+                                            </select>
 
-                                            <div class="dropdown">
+                                            <!-- <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                     aria-expanded="false">
@@ -144,7 +144,7 @@
                                                     </li>
 
                                                 </ul>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                         <div class="mb-3 form-group required">
@@ -215,9 +215,9 @@
                                         <div class="mb-3 form-group">
                                             <label class="form-label">Do you offer any of the following supplemental
                                                 pay?</label>
-                                            <button class="btn btn-sm mx-1" *ngFor="let t of SupplementaryType"
-                                                (click)="TypeTag(t)"
-                                                [ngClass]="(SupplementaryType.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.supplementalType}}</button>
+                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of supplementaryType"
+                                                (click)="supplementaryTag(t)"
+                                                [ngClass]="(selectedSupplemetaryType.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.supplementalType}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -226,9 +226,9 @@
                                         <div class="mb-3 form-group">
                                             <label class="form-labe">Are any of the following benefits
                                                 offered?</label>
-                                            <button class="btn btn-sm mx-1" *ngFor="let t of JobBenefit"
-                                                (click)="BenefitTag(t)"
-                                                [ngClass]="(JobBenefit.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobBenefitType}}</button>
+                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobBenefit"
+                                                (click)="benefitTag(t)"
+                                                [ngClass]="(selectedJobBenefit.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobBenefitType}}</button>
                                         </div>
                                     </div>
                                 </div>
