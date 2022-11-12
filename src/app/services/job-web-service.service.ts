@@ -53,4 +53,12 @@ export class JobWebServiceService {
   saveCompanyInformation(data:CompanyInformation): Observable<CompanyInformation>{
     return this.http.put<CompanyInformation>(this.jobPostingApi + '/companyInformation/company',data)
   }
+
+  getAllCompany(): Observable<CompanyInformation>{
+    return this.http.get<CompanyInformation>(this.jobPostingApi + '/companyInformation/company');
+  }
+
+  getCompanyById(companyId: number):Observable<CompanyInformation>{
+    return this.http.get<CompanyInformation>(this.jobPostingApi + '/companyInformation/company?companyId=' + companyId)
+  }
 }

@@ -6,17 +6,18 @@
                 <!-- <div class="progress">
               <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 0%"></div>
           </div> -->
-                <div class="btn-group mt-2 mb-2">
+                <div class="btn-group mt-2 mb-2 text-center">
                     <button class="btn btn-outline-success" (click)="step(1)">Basic Information</button>
                     <button class="btn btn-outline-success" (click)="step(2)">Include Details</button>
                     <button class="btn btn-outline-success" (click)="step(3)">Add Compensation</button>
                     <button class="btn btn-outline-success" (click)="step(4)">Review</button>
                 </div>
                 <div id="qbox-container">
-                    <form class="needs-validation" id="form-wrapper" method="post" name="form-wrapper" novalidate>
+                    <form class="needs-validation" id="form-wrapper" method="post" (ngSubmit)="onSubmit(jobInformation)">
                         <!-- STEPS HERE -->
                         <div id="steps-container">
                             <!--BASIC INFORMATION-->
+                            <div class="form-group">
                             <div class="step" [hidden]="currentStep != 1">
                                 <div class="row align-items-center g-lg-5 my-5">
                                     <div class="col-lg-7 text-center text-lg-start">
@@ -27,12 +28,13 @@
                                             src="/assets/createAccount.jpg" alt="Card image cap">
                                     </div>
                                 </div>
-                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                                    <div class="mb-3 row text-align: left;">
+                                <div class="px-4 pt-3 my-5 card shadow-sm">
+                                    <div class="mb-3 row">
                                         <label for="staticEmail" class="col-sm-3 col-form-label "><span
                                                 class="text-start">Country</span></label>
                                         <div class="col-sm-8 text-start">
-                                            <span>Country</span>
+                                            <span>{{company.companyCountry}}</span>
+                                            
                                             <button class="btn-sm btn-dark btn-edit"><i
                                                     class="bi bi-pencil-square"></i></button>
                                         </div>
@@ -41,7 +43,8 @@
                                         <label for="staticEmail" class="col-sm-3 col-form-label"><span
                                                 class="text-start">Language</span></label>
                                         <div class="col-sm-8 text-start">
-                                            <span>English</span>
+                                            <!-- <span>English</span> -->
+                                            <input class="form-control form-input" name="jobLanguage" [(ngModel)]="jobInformation.jobLanguage">
                                             <button class="btn-sm btn-dark btn-edit"><i
                                                     class="bi bi-pencil-square"></i></button>
                                         </div>
@@ -60,7 +63,7 @@
                                     <div class="mb-3 row">
                                         <div class="mb-3 form-group required">
                                             <label class="form-label">Job title</label>
-                                            <input type="email" class="form-control form-input" id="jobTitle">
+                                            <input type="text" class="form-control form-input" id="jobTitle" name="jobTitle" [(ngModel)]="jobInformation.jobTitle">
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +72,7 @@
                                         <div class="mb-3 form-group required">
                                             <label class="form-label">Job description</label>
                                             <textarea class="form-control form-input"
-                                                placeholder="Enter job description" id="floatingTextarea"></textarea>
+                                                placeholder="Enter job description" id="floatingTextarea" name="jobDescription" [(ngModel)]="jobInformation.jobDescription"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +80,7 @@
                                     <div class="mb-3 row">
                                         <div class="mb-3 form-group required">
                                             <label class="form-label">Job location</label>
-                                            <input type="email" class="form-control form-input" id="jobTitle">
+                                            <input type="text" class="form-control form-input" id="jobLocation" name="jobLocation" [(ngModel)]="jobInformation.jobLocation">
                                         </div>
                                     </div>
                                 </div>
@@ -86,8 +89,10 @@
                                     <!-- () from html to ts -->
                                 </div>
                             </div>
+                        </div>
                             <!--BASIC INFORMATION-->
                             <!--Include details-->
+                            <div class="form-group">
                             <div class="step" [hidden]="currentStep != 2">
                                 <div class="row align-items-center g-lg-5 my-5">
                                     <div class="col-lg-7 text-center text-lg-start">
@@ -125,13 +130,12 @@
                                                 opening?</label>
                                             <p align="left"><small>The more opening you have the more applicants you
                                                     will need</small></p>
-                                            <select class="form-select form-input" aria-label="Default select example">
+                                            <select class="form-select form-input" aria-label="Default select example" name="noOfCandidateToHire" [(ngModel)]="jobInformation.noOfCandidateToHire">
                                                 <option selected>Select an option</option>
                                                 <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
                                                     {{n.number}}
                                                 </option>
                                             </select>
-
                                             <!-- <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -151,7 +155,7 @@
                                             <label class="form-label">How quickly do you need to hire?</label>
                                             <p align="left"><small>if you need someone fast, you may need higher
                                                     visibility</small></p>
-                                            <select class="form-select form-input" aria-label="Default select example">
+                                            <select class="form-select form-input" aria-label="Default select example" name="jobDuration" [(ngModel)]="jobInformation.jobDuration">
                                                 <option selected>Select an option</option>
                                                 <option *ngFor="let n of HireDuration" [ngValue]="n.id">
                                                     {{n.duration}}
@@ -165,6 +169,7 @@
                                     <!-- () from html to ts -->
                                 </div>
                             </div>
+                        </div>
                             <!--Include details-->
                             <!--Add compensation-->
                             <div class="step" [hidden]="currentStep != 3">
@@ -184,8 +189,8 @@
                                             <p align="left"><small>Review the pay we estimated for your job and make
                                                     adjustments if needed</small></p>
                                             <p align="left"><small>Show pay by</small></p>
-                                            <select class="form-select form-input">
-                                                <option *ngFor="let n of payOption" (click)="selectedPayOption = n">
+                                            <select class="form-select form-input" (change)="onChange($event)"name="payBy" [(ngModel)]="jobInformation.payBy">
+                                                <option *ngFor="let n of payOption" [value]="n.id">
                                                     {{n.pay}}
                                                 </option>
                                             </select>
@@ -194,15 +199,29 @@
                                     <div class=" row" *ngIf="selectedPayOption.id == 1">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Minimum</label>
-                                            <input type="text" class="form-control" id="minimumId">
+                                            <input type="text" class="form-control" id="minimumId" name="minimumSalary" [(ngModel)]="jobInformation.minimumSalary">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Maximum</label>
-                                            <input type="text" class="form-control" id="minimumId">
+                                            <input type="text" class="form-control" id="minimumId" name="maximumSalary" [(ngModel)]="jobInformation.maximumSalary">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Rate</label>
-                                            <select class="form-select form-input">
+                                            <select class="form-select form-input" name="jobRate" [(ngModel)]="jobInformation.jobRate">
+                                                <option *ngFor="let n of payByRate" (click)="selectedPayByRate = n">
+                                                    {{n.rate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class=" row" *ngIf="selectedPayOption.id == 2">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Amount</label>
+                                            <input type="text" class="form-control" id="minimumId" name="amount" [(ngModel)]="jobInformation.amount">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Rate</label>
+                                            <select class="form-select form-input" name="jobRate" [(ngModel)]="jobInformation.jobRate">
                                                 <option *ngFor="let n of payByRate" (click)="selectedPayByRate = n">
                                                     {{n.rate}}
                                                 </option>
@@ -249,6 +268,15 @@
                                             src="/assets/reviewJob.jpg" alt="Card image cap">
                                     </div>
                                 </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3">
+                                            <!-- {{jobInformation.jobTitle}} -->
+                                            {{jobInformation | json}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Job</button>
                             </div>
                             <!--Review Job Post-->
                         </div>
