@@ -9,6 +9,8 @@ export interface CompanyInformation {
     employerName: string;
     companyPhoneNumber: string;
     companyLocation: string;
+    companyLanguage:string;
+    companyCountry:string;
 }
 
 export interface JobBenefitTypes {
@@ -28,8 +30,8 @@ export interface JobInformation {
     minimumSalary: string;
     maximumSalary: string;
     jobRate: string;
-    resume: number;
-    applicationDeadline: number;
+    payBy:string;
+    amount:string;
     supplementalPayTypes: SupplementalPayTypes[];
     jobTypes: JobTypes[];
     jobScheduleTypes: JobScheduleTypes[];
