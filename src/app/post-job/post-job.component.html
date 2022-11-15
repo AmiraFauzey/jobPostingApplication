@@ -105,6 +105,22 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Job Language</label>
+                                            <input type="text" class="form-control form-input"  id="jobLanguage" name="jobLanguage" [(ngModel)]="jobInformation.jobLanguage">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-4 pt-3 my-5 text-center card shadow-sm">
+                                    <div class="mb-3 row">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Job country</label>
+                                            <input type="text" class="form-control form-input" id="jobCountry" name="jobCountry" [(ngModel)]="jobInformation.jobCountry">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card-footer">
                                     <button class="btn btn-success" (click)="step(currentStep + 1)">Next</button>
                                     <!-- () from html to ts -->
@@ -457,6 +473,58 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-primary" (click)="saveSix()">Save changes</button>
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalSix()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Language</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.jobLanguage}}</span>
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalJobLanguage()"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobLanguage}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job Language</label>
+                                                            <input type="text" class="form-control" name="jobLocation" [(ngModel)]="jobInformation.jobLanguage">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveJobLanguage()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalJobLanguage()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Country</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.jobCountry}}</span>
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalJobCountry()"><i
+                                                    class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobCountry}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job Country</label>
+                                                            <input type="text" class="form-control" name="jobLocation" [(ngModel)]="jobInformation.jobCountry">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveJobCountry()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalJobCountry()">Close</button>
                                                     </div>
                                                 </div>
                                             </div>

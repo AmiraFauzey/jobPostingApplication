@@ -56,6 +56,8 @@ export class PostJobComponent implements OnInit {
   displayJobBenefit = "none"
   show = false;
   registerSucess = false;
+  displayJobLanguage = "none";
+  displayJobCountry = "none";
   //companyData$: Observable<CompanyInformation>;
 
   constructor(
@@ -234,7 +236,7 @@ export class PostJobComponent implements OnInit {
         console.log(response);
         this.registerSucess=true;
         this.router.navigate(['job/employerDashboard',response.companyId]);
-      });
+      },(error) => console.log('err',error));
   }
 
   editCompanyCountry(){
@@ -418,5 +420,29 @@ export class PostJobComponent implements OnInit {
   saveThirteen(){
     this.show = true;
     this.displayJobBenefit = "none";
+  }
+
+  openModalJobLanguage(){
+    this.displayJobLanguage = "block";
+  }
+
+  onCloseModalJobLanguage(){
+    this.displayJobLanguage = "none";
+  }
+
+  saveJobLanguage(){
+    this.displayJobLanguage = "none";
+  }
+
+  openModalJobCountry(){
+    this.displayJobCountry = "block";
+  }
+
+  onCloseModalJobCountry(){
+   this.displayJobCountry = "none";
+  }
+
+  saveJobCountry(){
+    this.displayJobCountry = "none";
   }
 }
