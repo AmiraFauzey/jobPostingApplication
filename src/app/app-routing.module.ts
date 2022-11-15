@@ -8,9 +8,9 @@ import { PostJobComponent } from './post-job/post-job.component';
 
 const routes: Routes = [
   { path: '', component: FrontPageComponent },
-  { path: 'job/employerDashboard', component: EmployerDashboardComponent },
+  { path: 'job/employerDashboard/:companyId', component: EmployerDashboardComponent },
   { path: 'job/createEmployer', component: CreateEmployerAccountComponent},
-  { path: 'job/createEmployer/:id', component: PostJobComponent},
+  { path: 'job/createEmployer/:companyId', component: PostJobComponent},
   { path:'**', component: ErrorPageComponent}
 ];
 

@@ -13,7 +13,7 @@
                     <button class="btn btn-outline-success" (click)="step(4)">Review</button>
                 </div>
                 <div id="qbox-container">
-                    <form class="needs-validation" id="form-wrapper" method="post" (ngSubmit)="onSubmit(jobInformation)">
+                    <form class="needs-validation" #saveJobForm="ngForm">
                         <!-- STEPS HERE -->
                         <div id="steps-container">
                             <!--BASIC INFORMATION-->
@@ -30,32 +30,53 @@
                                 </div>
                                 <div class="px-4 pt-3 my-5 card shadow-sm">
                                     <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-3 col-form-label "><span
-                                                class="text-start">Country</span></label>
+                                        <label class="col-sm-3 col-form-label" [hidden]="!hideCompanyCountryLabel">
+                                            <span class="text-start">Country</span>
+                                        </label>
                                         <div class="col-sm-8 text-start">
-                                            <span>{{company.companyCountry}}</span>
+                                            <span [hidden]="!hideCompanyCountryLabel">{{companyInformation.companyCountry}}</span>
                                             
-                                            <button class="btn-sm btn-dark btn-edit"><i
+                                            <button class="btn-sm btn-dark btn-edit" *ngIf="this.isButtonCountryVisible" (click)="[editCompanyCountry(),this.isButtonCountryVisible = false]"><i
                                                     class="bi bi-pencil-square"></i></button>
                                         </div>
                                     </div>
+                                    <div class="mb-3 row" [hidden]="!hideCompanyCountry">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Country</label>
+                                            <input type="text" class="form-control form-input" id="companyCountry" name="companyCountry" [(ngModel)]="companyInformation.companyCountry">
+                                        </div>
+                                    </div>
                                     <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-3 col-form-label"><span
-                                                class="text-start">Language</span></label>
+                                        <label class="col-sm-3 col-form-label" [hidden]="!hiddenCompanyLanguageLabel">
+                                            <span class="text-start">Language</span>
+                                        </label>
                                         <div class="col-sm-8 text-start">
                                             <!-- <span>English</span> -->
-                                            <input class="form-control form-input" name="jobLanguage" [(ngModel)]="jobInformation.jobLanguage">
-                                            <button class="btn-sm btn-dark btn-edit"><i
+                                           <span [hidden]="!hiddenCompanyLanguageLabel">{{companyInformation.companyLanguage}}</span>
+                                            <button class="btn-sm btn-dark btn-edit" *ngIf="this.isButtonLanguageVisible" (click)="[editCompanyLanguage(),this.isButtonLanguageVisible = false]"><i
                                                     class="bi bi-pencil-square"></i></button>
                                         </div>
                                     </div>
+                                    <div class="mb-3 row" [hidden]="!hideCompanyLanguage">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Language</label>
+                                            <input type="text" class="form-control form-input" id="companyLanguage" name="companyLanguage" [(ngModel)]="companyInformation.companyLanguage">
+                                        </div>
+                                    </div>
                                     <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-3 col-form-label"><span
-                                                class="text-start">Company name</span></label>
+                                        <label class="col-sm-3 col-form-label" [hidden]="!hiddenCompanyNameLabel">
+                                            <span class="text-start">Company name</span>
+                                        </label>
                                         <div class="col-sm-8 text-start">
-                                            <span>Amazon</span>
-                                            <button class="btn-sm btn-dark btn-edit"><i
+                                            <span [hidden]="!hiddenCompanyNameLabel">{{companyInformation.companyName}}</span>
+                                            <button class="btn-sm btn-dark btn-edit" *ngIf="this.isButtonNameVisible" (click)="[editCompanyName(),this.isButtonNameVisible = false]"><i
                                                     class="bi bi-pencil-square"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row" [hidden]="!hideCompanyName">
+                                        <div class="mb-3 form-group required">
+                                            <label class="form-label">Company name</label>
+                                            <input type="text" class="form-control form-input" id="companyName" name="companyName" [(ngModel)]="companyInformation.companyName">
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +153,7 @@
                                                     will need</small></p>
                                             <select class="form-select form-input" aria-label="Default select example" name="noOfCandidateToHire" [(ngModel)]="jobInformation.noOfCandidateToHire">
                                                 <option selected>Select an option</option>
-                                                <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
+                                                <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.number">
                                                     {{n.number}}
                                                 </option>
                                             </select>
@@ -157,7 +178,7 @@
                                                     visibility</small></p>
                                             <select class="form-select form-input" aria-label="Default select example" name="jobDuration" [(ngModel)]="jobInformation.jobDuration">
                                                 <option selected>Select an option</option>
-                                                <option *ngFor="let n of HireDuration" [ngValue]="n.id">
+                                                <option *ngFor="let n of HireDuration" [ngValue]="n.duration">
                                                     {{n.duration}}
                                                 </option>
                                             </select>
@@ -189,8 +210,8 @@
                                             <p align="left"><small>Review the pay we estimated for your job and make
                                                     adjustments if needed</small></p>
                                             <p align="left"><small>Show pay by</small></p>
-                                            <select class="form-select form-input" (change)="onChange($event)"name="payBy" [(ngModel)]="jobInformation.payBy">
-                                                <option *ngFor="let n of payOption" [value]="n.id">
+                                            <select class="form-select form-input" (change)="onChange($event)" name="payBy" [(ngModel)]="jobInformation.payBy">
+                                                <option *ngFor="let n of payOption" [value]="n.pay">
                                                     {{n.pay}}
                                                 </option>
                                             </select>
@@ -214,7 +235,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class=" row" *ngIf="selectedPayOption.id == 2">
+                                    <div class=" row" *ngIf="selectedPayOption.id == 2 || selectedPayOption.id == 3 || selectedPayOption.id == 4">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Amount</label>
                                             <input type="text" class="form-control" id="minimumId" name="amount" [(ngModel)]="jobInformation.amount">
@@ -268,15 +289,425 @@
                                             src="/assets/reviewJob.jpg" alt="Card image cap">
                                     </div>
                                 </div>
+                                <!--Company Information-->
                                 <div class="px-4 pt-3 my-5 text-center card shadow-sm">
-                                    <div class="mb-3 row">
-                                        <div class="mb-3">
-                                            <!-- {{jobInformation.jobTitle}} -->
-                                            {{jobInformation | json}}
+                                    <div class="card-body">
+                                        <h5 class="card-title">Company Information</h5>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Country</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{companyInformation.companyCountry}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalOne()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayCompanyCountry}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Company Country</label>
+                                                            <input type="text" class="form-control" name="companyCountry" [(ngModel)]="companyInformation.companyCountry">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveOne()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalOne()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Language</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{companyInformation.companyLanguage}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalTwo()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayCompanyLanguage}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Company language</label>
+                                                            <input type="text" class="form-control" name="companyLanguage" [(ngModel)]="companyInformation.companyLanguage">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveTwo()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalTwo()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Company name</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{companyInformation.companyName}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalThree()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayCompanyName}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Company Name</label>
+                                                            <input type="text" class="form-control" name="companyName" [(ngModel)]="companyInformation.companyName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveThree()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalThree()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit Job</button>
+                                 <!--Company Information-->
+                                 <!--Job Information-->
+                                <div class="px-4 pt-3 my-5 text-start card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Job Information</h5>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Title</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.jobTitle}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalFour()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobTitle}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job title</label>
+                                                            <input type="text" class="form-control" name="jobTitle" [(ngModel)]="jobInformation.jobTitle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveFour()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalFour()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Description</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.jobDescription}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalFive()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobDescription}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job Description</label>
+                                                            <input type="text" class="form-control" name="jobDescription" [(ngModel)]="jobInformation.jobDescription">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveFive()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalFive()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Location</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.jobLocation}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalSix()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobLocation}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job location</label>
+                                                            <input type="text" class="form-control" name="jobLocation" [(ngModel)]="jobInformation.jobLocation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveSix()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalSix()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="card-title">Job details</h5>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Type</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobInformation.jobTypes">{{t.jobType}}</span>
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalSeven()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobType}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job Type</label>
+                                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobType"
+                                                (click)="typeTag(t)"
+                                                [ngClass]="(selectedJobTypes.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobType}}</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveSeven()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalSeven()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job Schedule</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobInformation.jobScheduleTypes">{{t.jobScheduleType}}</span>
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalEight()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobSchedule}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job Schedule</label>
+                                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobSchedule"
+                                                            (click)="scheduleTag(t)"
+                                                            [ngClass]="(selectedJobSchedule.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobScheduleType}}</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveEight()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalEight()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">No of candidates to hire</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.noOfCandidateToHire}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalNine()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayNoOfCandidate}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">No of candidates to hire</label>
+                                                            <select class="form-select form-input" aria-label="Default select example" name="noOfCandidateToHire" [(ngModel)]="jobInformation.noOfCandidateToHire">
+                                                                <option selected>Select an option</option>
+                                                                <option *ngFor="let n of noOfCandidateHire" [ngValue]="n.id">
+                                                                    {{n.number}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveNine()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalNine()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Duration to hire candidates</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.jobDuration}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalTen()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobDuration}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Duration to hire</label>
+                                                            <select class="form-select form-input" aria-label="Default select example" name="jobDuration" [(ngModel)]="jobInformation.jobDuration">
+                                                                <option selected>Select an option</option>
+                                                                <option *ngFor="let n of HireDuration" [ngValue]="n.id">
+                                                                    {{n.duration}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveTen()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalTen()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Pay type</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span>{{jobInformation.payBy}}</span>
+                                                
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalEleven()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayPayType}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Pay By</label>
+                                                            <select class="form-select form-input" (change)="onChange($event)" name="payBy" [(ngModel)]="jobInformation.payBy">
+                                                                <option *ngFor="let n of payOption" [value]="n.id">
+                                                                    {{n.pay}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <div class=" row" *ngIf="selectedPayOption.id == 1">
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label class="form-label">Minimum</label>
+                                                                    <input type="text" class="form-control" id="minimumId" name="minimumSalary" [(ngModel)]="jobInformation.minimumSalary">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="form-label">Maximum</label>
+                                                                    <input type="text" class="form-control" id="minimumId" name="maximumSalary" [(ngModel)]="jobInformation.maximumSalary">
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label class="form-label">Rate</label>
+                                                                    <select class="form-select form-input" name="jobRate" [(ngModel)]="jobInformation.jobRate">
+                                                                        <option *ngFor="let n of payByRate" (click)="selectedPayByRate = n">
+                                                                            {{n.rate}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" row" *ngIf="selectedPayOption.id == 2 || selectedPayOption.id == 3 || selectedPayOption.id == 4">
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label class="form-label">Amount</label>
+                                                                    <input type="text" class="form-control" id="minimumId" name="amount" [(ngModel)]="jobInformation.amount">
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label class="form-label">Rate</label>
+                                                                    <select class="form-select form-input" name="jobRate" [(ngModel)]="jobInformation.jobRate">
+                                                                        <option *ngFor="let n of payByRate" (click)="selectedPayByRate = n">
+                                                                            {{n.rate}}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveEleven()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalEleven()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Supplemental pay type</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobInformation.supplementalPayTypes">{{t.supplementalType}}</span>
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalTwelve()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displaySupplementalType}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Spplemental pay</label>
+                                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of supplementaryType"
+                                                (click)="supplementaryTag(t)"
+                                                [ngClass]="(selectedSupplemetaryType.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.supplementalType}}</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveTwelve()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalTwelve()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label class="col-sm-3 col-form-label">
+                                                <span class="text-start">Job benefit</span>
+                                            </label>
+                                            <div class="col-sm-8 text-start">
+                                                <span class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobInformation.jobBenefitPayTypes">{{t.jobBenefitType}}</span>
+                                                <button class="btn-sm btn-dark btn-edit" (click)="openModalThirteen()"><i
+                                                        class="bi bi-pencil-square"></i></button>
+                                            </div>
+                                            <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayJobBenefit}">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Job benefits</label>
+                                                            <button class="btn btn-sm mx-1 mb-2" *ngFor="let t of jobBenefit"
+                                                (click)="benefitTag(t)"
+                                                [ngClass]="(selectedJobBenefit.indexOf(t) >= 0) ? 'btn-primary' : 'btn-outline-primary'">{{t.jobBenefitType}}</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" (click)="saveThirteen()">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCloseModalThirteen()">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <!--Job Information-->
+                                <button type="submit" class="btn btn-primary mb-3" (click)="saveJob()">Submit Job</button>
                             </div>
                             <!--Review Job Post-->
                         </div>
@@ -286,6 +717,9 @@
                     <button id="submit-btn" type="submit" (click)="submit()">Submit</button>
                  </div> -->
                     </form>
+                    <div class="alert alert-success" role="alert" *ngIf="registerSucess">
+                        <h4 class="alert-heading">Successfully submit Job</h4>
+                    </div>
                 </div>
             </div>
         </div>

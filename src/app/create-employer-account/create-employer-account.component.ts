@@ -10,8 +10,9 @@ import { JobWebServiceService } from '../services/job-web-service.service';
   styleUrls: ['./create-employer-account.component.css'],
 })
 export class CreateEmployerAccountComponent implements OnInit {
+  registerSucess = false;
   companyInformation: CompanyInformation = {
-    companyId: 0,
+    companyId: null,
     companyName: '',
     companySize: '',
     employerName: '',
@@ -37,15 +38,22 @@ export class CreateEmployerAccountComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(value: CompanyInformation) {
+  // onSubmit(value: CompanyInformation) {
+  //   this.jobWebServiceService
+  //     .saveCompanyInformation(value)
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //     });
+  // }
+
+  saveAndContinue(){
     this.jobWebServiceService
-      .saveCompanyInformation(value)
+      .saveCompanyInformation(this.companyInformation)
       .subscribe((response) => {
         console.log(response);
+        this.registerSucess=true;
+        this.router.navigate(['/job/createEmployer',response.companyId]);
       });
-  }
-
-  saveAndContinue(value: CompanyInformation){
-    this.router.navigate(['/job/createEmployer',value.companyId]);
+    
   }
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Params, Router, ParamMap } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
 import {
   CompanyInformation,
   JobBenefitTypes,
@@ -29,11 +28,40 @@ export class PostJobComponent implements OnInit {
   selectedJobBenefit: JobBenefitTypes[] = [];
   selectedSupplemetaryType: SupplementalPayTypes[] = [];
   submitted = false;
-  companyId:any;
-  company:any;
+  //company: CompanyInformation;
+  hideCompanyCountry = false;
+  hideCompanyCountryLabel = true;
+  isButtonCountryVisible = true;
+  isButtonLanguageVisible = true;
+  hiddenCompanyLanguageLabel = true;
+  hideCompanyLanguage = false;
+  hiddenCompanyNameLabel = true;
+  isButtonNameVisible = true;
+  hideCompanyName = false;
+  session: any;
+  hidePayOptionOne = false;
+  hidePayOptionTwo = false;
+  displayCompanyCountry = "none";
+  displayCompanyLanguage = "none";
+  displayCompanyName = "none";
+  displayJobTitle = "none";
+  displayJobDescription = "none";
+  displayJobLocation = "none";
+  displayJobType = "none";
+  displayJobSchedule = "none";
+  displayNoOfCandidate = "none";
+  displayJobDuration = "none";
+  displayPayType = "none";
+  displaySupplementalType = "none";
+  displayJobBenefit = "none"
+  show = false;
+  registerSucess = false;
+  //companyData$: Observable<CompanyInformation>;
+
   constructor(
     private jobWebServiceService: JobWebServiceService,
-    private activatedRoute: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   noOfCandidateHire = [
@@ -81,7 +109,7 @@ export class PostJobComponent implements OnInit {
   selectedPayByRate = { id: 1, rate: 'per hour' };
 
   jobInformation: JobInformation = {
-    jobId: 0,
+    jobId: null,
     jobCountry: '',
     jobLanguage: '',
     jobTitle: '',
@@ -98,11 +126,11 @@ export class PostJobComponent implements OnInit {
     jobTypes: [],
     jobScheduleTypes: [],
     jobBenefitPayTypes: [],
-    companyId: 1,
+    companyId: null,
   };
 
-  companyInformation:CompanyInformation = {
-    companyId: NaN,
+  companyInformation: CompanyInformation = {
+    companyId: null,
     companyName: '',
     companySize: '',
     employerName: '',
@@ -110,7 +138,7 @@ export class PostJobComponent implements OnInit {
     companyLocation: '',
     companyLanguage: '',
     companyCountry: '',
-  }
+  };
 
   ngOnInit(): void {
     // this.quicktoolService.getCategories().subscribe(res => {
@@ -132,8 +160,21 @@ export class PostJobComponent implements OnInit {
       this.jobType = res;
     });
 
-    this.companyId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.company = this.jobWebServiceService.getCompanyById(this.companyId);
+    // const companyId = parseInt(this.route.snapshot.paramMap.get('companyId'));
+    // this.jobWebServiceService.getCompanyById(companyId)
+    //   .subscribe(company => this.company = company);
+    //   console.log(this.company)
+
+    this.route.params.subscribe((param) => {
+      this.jobWebServiceService
+        .getCompanyById(param['companyId'])
+        .subscribe((res) => {
+          this.companyInformation = res;
+          this.jobInformation.companyId = res.companyId;
+          console.log(this.companyInformation);
+         
+        });
+    });
   }
 
   step(step: number): void {
@@ -186,11 +227,196 @@ export class PostJobComponent implements OnInit {
     )[0];
   }
 
-  onSubmit(value: JobInformation) {
+  saveJob() {
     this.jobWebServiceService
-      .saveJobInformation(value)
+      .saveJobInformation(this.jobInformation)
       .subscribe((response) => {
         console.log(response);
+        this.registerSucess=true;
+        this.router.navigate(['job/employerDashboard',response.companyId]);
       });
+  }
+
+  editCompanyCountry(){
+    this.hideCompanyCountry = !this.hideCompanyCountry;
+    this.hideCompanyCountryLabel = !this.hideCompanyCountryLabel;
+  }
+
+  editCompanyLanguage(){
+    this.hideCompanyLanguage = !this.hideCompanyLanguage;
+    this.hiddenCompanyLanguageLabel = !this.hiddenCompanyLanguageLabel;
+  }
+
+  editCompanyName(){
+    this.hideCompanyName = !this.hideCompanyName;
+    this.hiddenCompanyNameLabel = !this.hiddenCompanyNameLabel;
+  }
+
+  openModalOne(){
+    this.displayCompanyCountry = "block";
+  }
+
+  onCloseModalOne(){
+    this.displayCompanyCountry = "none";
+  }
+
+  saveOne(){
+    this.displayCompanyCountry = "none";
+  }
+
+  openModalTwo(){
+    this.displayCompanyLanguage = "block";
+  }
+
+  onCloseModalTwo(){
+    this.displayCompanyLanguage = "none";
+  }
+
+  saveTwo(){
+    this.show = true;
+    this.displayCompanyLanguage = "none";
+  }
+
+  openModalThree(){
+    this.displayCompanyName = "block";
+  }
+
+  onCloseModalThree(){
+    this.displayCompanyName = "none";
+  }
+
+  saveThree(){
+    this.show = true;
+    this.displayCompanyName = "none";
+  }
+
+  openModalFour(){
+    this.displayJobTitle = "block";
+  }
+
+  onCloseModalFour(){
+    this.displayJobTitle = "none";
+  }
+
+  saveFour(){
+    this.show = true;
+    this.displayJobTitle = "none";
+  }
+
+  openModalFive(){
+    this.displayJobDescription = "block";
+  }
+
+  onCloseModalFive(){
+    this.displayJobDescription = "none";
+  }
+
+  saveFive(){
+    this.show = true;
+    this.displayJobDescription = "none";
+  }
+
+  openModalSix(){
+    this.displayJobLocation = "block";
+  }
+
+  onCloseModalSix(){
+    this.displayJobLocation = "none";
+  }
+
+  saveSix(){
+    this.show = true;
+    this.displayJobLocation = "none";
+  }
+
+  openModalSeven(){
+    this.displayJobType = "block";
+  }
+
+  onCloseModalSeven(){
+    this.displayJobType = "none";
+  }
+
+  saveSeven(){
+    this.show = true;
+    this.displayJobType = "none";
+  }
+
+  openModalEight(){
+    this.displayJobSchedule = "block";
+  }
+
+  onCloseModalEight(){
+    this.displayJobSchedule = "none";
+  }
+
+  saveEight(){
+    this.show = true;
+    this.displayJobSchedule = "none";
+  }
+
+  openModalNine(){
+    this.displayNoOfCandidate = "block";
+  }
+
+  onCloseModalNine(){
+    this.displayNoOfCandidate = "none";
+  }
+
+  saveNine(){
+    this.show = true;
+    this.displayNoOfCandidate = "none";
+  }
+
+  openModalTen(){
+    this.displayJobDuration = "block";
+  }
+
+  onCloseModalTen(){
+    this.displayJobDuration = "none";
+  }
+
+  saveTen(){
+    this.show = true;
+    this.displayJobDuration = "none";
+  }
+
+  openModalEleven(){
+    this.displayPayType = "block";
+  }
+
+  onCloseModalEleven(){
+    this.displayPayType = "none";
+  }
+
+  saveEleven(){
+    this.show = true;
+    this.displayPayType = "none";
+  }
+
+  openModalTwelve(){
+    this.displaySupplementalType = "block";
+  }
+
+  onCloseModalTwelve(){
+    this.displaySupplementalType = "none";
+  }
+
+  saveTwelve(){
+    this.show = true;
+    this.displaySupplementalType = "none";
+  }
+
+  openModalThirteen(){
+    this.displayJobBenefit = "block";
+  }
+
+  onCloseModalThirteen(){
+    this.displayJobBenefit = "none";
+  }
+
+  saveThirteen(){
+    this.show = true;
+    this.displayJobBenefit = "none";
   }
 }
